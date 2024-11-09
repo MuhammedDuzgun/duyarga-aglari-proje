@@ -18,12 +18,12 @@ public class NotificationService implements INotificationService {
     public void createNotification() {
         Notification notification = new Notification();
         notification.setBody("Gaz Algılandı");
-        notificationRepository.save(notification);
+        Notification savedNotification = notificationRepository.save(notification);
 
         //send mail
         String targetMail = "muhammedduzgun00@gmail.com";
         String subject = "Gaz Dedektoru Bilgilendirme";
-        String text = notification.getBody() + "\n" + " Tarih Bilgileri : " + notification.getCreationDateTime();
+        String text = savedNotification.getBody() + "\n" + " Tarih Bilgileri : " + savedNotification.getCreationDateTime();
         emailService.sendNotificationMail(targetMail, subject, text);
     }
 }
